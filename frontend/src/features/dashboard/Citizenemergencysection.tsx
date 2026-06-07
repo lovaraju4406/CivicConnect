@@ -5,7 +5,6 @@
 
 import { useState, useEffect, useCallback, useRef } from "react";
 import EmergencyButtons from "./EmergencyButtons";
-import LiveResponderTracker from "./LiveResponderTracker";
 import AreaRiskIndicator from "./AreaRiskIndicator";
 
 // ── TYPES ──────────────────────────────────────────────────────────────────────
