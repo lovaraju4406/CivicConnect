@@ -5,6 +5,7 @@
 
 import { useState, useEffect, useCallback, useRef } from "react";
 import EmergencyButtons from "./EmergencyButtons";
+import LiveResponderTracker from "./LiveResponderTracker";
 import AreaRiskIndicator from "./AreaRiskIndicator";
 
 // ── TYPES ──────────────────────────────────────────────────────────────────────
@@ -1057,7 +1058,7 @@ export default function CitizenEmergencySection({ userId, userName, onReportEmer
         <div style={{ position: "relative", display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: 14 }}>
           <div>
             <div style={{ fontSize: 9.5, color: "rgba(255,255,255,.65)", fontWeight: 700, letterSpacing: ".15em", marginBottom: 5, textTransform: "uppercase" }}>
-              CivicConnect · Emergency Response
+              AP Citizen Portal · Emergency Response
             </div>
             <h2 style={{ fontSize: 24, fontWeight: 900, color: "#fff", lineHeight: 1.1, fontFamily: "'DM Serif Display', Georgia, serif", marginBottom: 6 }}>
               🚨 Emergency Centre
