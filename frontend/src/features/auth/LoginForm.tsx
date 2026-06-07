@@ -17,7 +17,12 @@ export default function LoginForm() {
     dispatch(
       loginSuccess({
         token: "demo-token",
-        user: { id: "1", role: "citizen" },
+        user: {
+  id: "1",
+  role: "citizen",
+  name: "",
+  email: ""
+},
       })
     );
 

@@ -1,9 +1,10 @@
 import { Navigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import type { RootState } from "../store";
+import type { ReactNode } from "react";
 
 type Props = {
-  children: JSX.Element;
+  children: ReactNode;
 };
 
 export default function RequireAuth({ children }: Props) {

@@ -10,6 +10,7 @@ import { clearComplaints } from "../../store/complaintSlice";
 import { clearNotifications } from "../../store/notificationSlice";
 import { useNavigate } from "react-router-dom";
 import AIChatWidget from "../../features/ai/AIChatWidget";
+const API = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
 
 /* ─────────────────────── constants ─────────────────────── */
 const SC: Record<string, { bg: string; text: string; dot: string; border: string }> = {
@@ -1420,7 +1421,7 @@ Resolution note: ${resolutionNote || "No note provided"}`, sender: user?.name ||
 
     {notifsOpen && (
       <UnifiedNotifsPanel
-        notifs={[...tasks.map((t:any)=>({}))]} // keep your original logic here
+        notifs={[]} // keep your original logic here
         onRead={()=>{}}
         onReadAll={()=>{}}
         onClose={()=>setNotifsOpen(false)}
@@ -1669,14 +1670,17 @@ Resolution note: ${resolutionNote || "No note provided"}`, sender: user?.name ||
                   {Object.keys(deptStats).length === 0
                     ? <div style={{ textAlign: "center", color: "var(--text-muted)", fontSize: 13, padding: "30px 0" }}>No department data yet</div>
                     : (Object.entries(deptStats) as any[]).map(([dept, s]:any)=>{
-                      const pct = s.total > 0 ? Math.round((s.done / s.total) * 100) : 0;
+                      const stat:any = s;
+const pct = stat.total > 0
+  ? Math.round((stat.done / stat.total) * 100)
+  : 0;
                       return (
                         <div key={dept} style={{ marginBottom: 13 }}>
                           <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 5, alignItems: "center" }}>
                             <span style={{ fontSize: 12, color: "var(--text-secondary)", fontWeight: 600, display: "flex", alignItems: "center", gap: 5 }}>
                               <span>{DI[dept] || "🏛️"}</span>{dept.length > 14 ? dept.slice(0, 14) + "…" : dept}
                             </span>
-                            <span style={{ fontSize: 10.5, color: "var(--text-muted)", fontFamily: "'DM Mono',monospace" }}>{s.done}/{s.total}</span>
+                            <span style={{ fontSize: 10.5, color: "var(--text-muted)", fontFamily: "'DM Mono',monospace" }}>{stat.done}/{stat.total}</span>
                           </div>
                           <div style={{ height: 6, background: "var(--bg-card-alt)", borderRadius: 3, overflow: "hidden", border: "1px solid var(--border)" }}>
                             <div style={{ height: "100%", width: `${pct}%`, background: pct >= 80 ? "#22c55e" : pct >= 50 ? "#f59e0b" : "#ef4444", borderRadius: 3 }} />
@@ -1822,12 +1826,15 @@ Resolution note: ${resolutionNote || "No note provided"}`, sender: user?.name ||
                 {Object.keys(deptStats).length === 0
                   ? <div style={{ textAlign: "center", color: "var(--text-muted)", fontSize: "13px", padding: "20px" }}>No data yet</div>
                   : Object.entries(deptStats).map(([dept, s]) => {
-                    const pct = s.total > 0 ? Math.round((s.done / s.total) * 100) : 0;
+                    const stat:any = s;
+const pct = stat.total > 0
+  ? Math.round((stat.done / stat.total) * 100)
+  : 0;
                     return (
                       <div key={dept} style={{ marginBottom: "12px" }}>
                         <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "6px" }}>
                           <span style={{ fontSize: "13px", color: "var(--text-primary)", fontWeight: 600 }}>{DI[dept] || "🏛️"} {dept}</span>
-                          <span style={{ fontSize: "11px", color: "var(--text-muted)", fontFamily: "'DM Mono',monospace" }}>{s.done}/{s.total} · {pct}%</span>
+                          <span style={{ fontSize: "11px", color: "var(--text-muted)", fontFamily: "'DM Mono',monospace" }}>{stat.done}/{stat.total} · {pct}%</span>
                         </div>
                         <div className="analytics-bar"><div className="analytics-bar-fill" style={{ width: `${pct}%` }} /></div>
                       </div>

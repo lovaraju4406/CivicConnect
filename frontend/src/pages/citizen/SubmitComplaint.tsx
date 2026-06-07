@@ -97,7 +97,7 @@ export default function SubmitComplaint() {
       address,
       image: imageData ?? undefined,
       status: "Pending",
-      createdAt: Date.now(),
+      createdAt: new Date().toISOString(),
       userId: user.id,
       userName: user.name ?? "Unknown",
     }));
@@ -105,7 +105,11 @@ export default function SubmitComplaint() {
     // Build ticketId for the notification (slice generates the real one,
     // but we need something for the toast — use a temp id)
     const tempTicket = `AP-CIV-${new Date().getFullYear()}-${id.slice(0, 5).toUpperCase()}`;
-    dispatch(addNotification(`Complaint submitted successfully. Ticket: ${tempTicket}`));
+    dispatch(addNotification({
+  id: Date.now().toString(),
+  message: `Complaint submitted successfully. Ticket: ${tempTicket}`,
+  type: "success"
+} as any));
     toast.success(`Complaint submitted! 🎉`);
 
     setTitle("");

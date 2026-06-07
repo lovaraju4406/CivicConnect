@@ -1,10 +1,10 @@
 // persistMiddleware.ts — only persists auth session, not complaints/notifications
 // (those now come from the real backend)
 import type { Middleware } from "@reduxjs/toolkit";
-import type { RootState } from "./index";
+
 
 // ── Auth persistence ──────────────────────────────────────────────────────────
-export function loadAuthState(): { auth: RootState["auth"] } | undefined {
+export function loadAuthState(): any {
   try {
     // Primary source: "auth" key (set by Login/Register pages)
     const raw = localStorage.getItem("auth");
@@ -27,7 +27,7 @@ export function loadAuthState(): { auth: RootState["auth"] } | undefined {
   } catch { return undefined; }
 }
 
-export function saveAuthState(auth: RootState["auth"]) {
+export function saveAuthState(auth: any) {
   try {
     if (auth.token && auth.user) {
       localStorage.setItem("auth", JSON.stringify({ token: auth.token, user: auth.user }));
@@ -44,13 +44,13 @@ export function clearAuthState() {
 
 // Kept for API compatibility — no-ops now (data comes from backend)
 export function loadUserData(_userId: string) { return undefined; }
-export function saveUserData(_userId: string, _state: RootState) {}
+export function saveUserData(_userId: string, _state: any) {}
 export function wipeUserData(_userId: string) {}
 
 // ── Middleware — only saves auth ──────────────────────────────────────────────
 export const persistMiddleware: Middleware = (store) => (next) => (action) => {
   const result = next(action);
-  const state  = store.getState() as RootState;
+  const state = store.getState() as any;
   saveAuthState(state.auth);
   return result;
 };

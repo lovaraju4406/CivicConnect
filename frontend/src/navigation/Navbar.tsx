@@ -11,8 +11,8 @@ export default function Navbar() {
   const location   = useLocation();
   const { user, isAuthenticated } = useSelector((s: RootState) => s.auth);
   const notifCount = useSelector((s: RootState) =>
-    (s.notifications?.items ?? []).filter((n: any) => !n.read).length
-  );
+  (s.notifications?.list ?? []).filter((n: any) => !n.read).length
+);
   const [menuOpen, setMenuOpen] = useState(false);
 
   const role = user?.role ?? "citizen";

@@ -327,7 +327,7 @@ function SubmitModal({onClose,onSubmit,userId,userName,existingComplaints}:Submi
           <div style={{position:"absolute",inset:0,backgroundImage:"radial-gradient(circle at 1px 1px,rgba(255,255,255,.06) 1px,transparent 0)",backgroundSize:"24px 24px"}}/>
           <div style={{position:"relative",display:"flex",alignItems:"center",justifyContent:"space-between",gap:12}}>
             <div style={{display:"flex",alignItems:"center",gap:13}}>
-              <img src="/ap-bg.png" alt="CivicConnect" style={{width:46,height:46,objectFit:"contain",filter:"brightness(0) invert(1)",opacity:.92,flexShrink:0,dropShadow:"0 2px 8px rgba(0,0,0,.3)"}}/>
+              <img src="/ap-bg.png" alt="CivicConnect" style={{width:46,height:46,objectFit:"contain",filter:"brightness(0) invert(1) drop-shadow(0 2px 8px rgba(0,0,0,.3))",opacity:.92,flexShrink:0}}/>
               <div>
                 <div style={{fontSize:9.5,color:"rgba(255,255,255,.75)",fontWeight:700,letterSpacing:".14em",marginBottom:3,textTransform:"uppercase"}}>New Complaint — CivicConnect</div>
                 <h2 style={{fontSize:20,fontWeight:900,color:"#fff",fontFamily:"'DM Serif Display',serif",lineHeight:1.1}}>Report a Civic Issue</h2>
@@ -1582,7 +1582,7 @@ export default function CitizenDashboard(){
 
         {showNotifs && (
           <UnifiedNotifsPanel
-            notifs={citizenNotifs}
+            notifs={citizenNotifs as any}
             onRead={markRead}
             onReadAll={markAll}
             onClose={()=>setShowNotifs(false)}

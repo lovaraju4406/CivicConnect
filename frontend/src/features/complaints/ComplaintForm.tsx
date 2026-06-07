@@ -91,7 +91,6 @@ export default function ComplaintForm({ onSubmit, loading = false, initialValues
           placeholder="e.g. Broken streetlight near park"
           style={inputStyle("title")}
           onFocus={e => (e.currentTarget.style.borderColor = "#ea6800")}
-          onBlur2={undefined as any}
         />
         {errors.title && <p style={{ fontSize: "12px", color: "#ef4444", margin: 0 }}>{errors.title}</p>}
       </div>
